@@ -2,6 +2,8 @@
 #https://gist.github.com/thinkxl/8296214
 from bottle import request, route, run, template, auth_basic
 #need to install pywin32 from sourceforge
+#import win32security
+#import win32api
 
 userList={"TEST":"TOPsecrete"}
 def check(user, pw):
