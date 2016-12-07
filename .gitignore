@@ -87,3 +87,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+FileScan/my-filescan.txt
+*.txt
