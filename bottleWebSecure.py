@@ -1,14 +1,18 @@
 #http://stackoverflow.com/questions/13272528/bottle-py-http-auth
 #https://gist.github.com/thinkxl/8296214
 from bottle import request, route, run, template, auth_basic
+#need to install pywin32 from sourceforge
 
 userList={"TEST":"TOPsecrete"}
 def check(user, pw):
     # Check user/pw here and return True/False
-    password = userList[user.upper()]
-    print(user+":"+pw)
+    user = user.upper()
+    password = ""
+    if user in userList.keys():
+        password = userList[user]
     if pw==password and pw != "":
         return True
+    print("not found: "+user+" / "+pw)
     return False
 
 @route('/hello/<name>')
