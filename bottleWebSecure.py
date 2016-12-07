@@ -2,19 +2,34 @@
 #https://gist.github.com/thinkxl/8296214
 from bottle import request, route, run, template, auth_basic
 #need to install pywin32 from sourceforge
-#import win32security
+import win32security
 #import win32api
 
-userList={"TEST":"TOPsecrete"}
+def win32check(user, pw):
+    try:
+        token = win32security.LogonUser(
+        user, "ezesoft", pw,
+        win32security.LOGON32_LOGON_NETWORK,
+        win32security.LOGON32_PROVIDER_DEFAULT)
+        authenticated = bool(token)
+        print("authenticated %r"% (authenticated))
+        return authenticated
+    except:
+        return False
+
+userList={"TEST":"TOPsecrete"}    
 def check(user, pw):
     # Check user/pw here and return True/False
     user = user.upper()
     password = ""
     if user in userList.keys():
         password = userList[user]
+    else:
+        print("not found: "+user+" / "+pw)
+        return False
     if pw==password and pw != "":
         return True
-    print("not found: "+user+" / "+pw)
+    print("no match: "+user+" / "+pw)
     return False
 
 @route('/hello/<name>')
