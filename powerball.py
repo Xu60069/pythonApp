@@ -10,7 +10,8 @@ class PowerBallDraw:
 
     def draw(self):
         count = 0;
-        self.whites = [0,0,0,0,0];
+        self.whites = [None]*5; #[0,0,0,0,0];
+        
         while (count<5):
             newOne = random.randint(1,MAX_WHITE);
             if (newOne in self.whites):
@@ -39,7 +40,7 @@ else:
 ticketsfile = open("powerball.txt","w");
 powerball = PowerBallDraw();
 draws=1;
-while (1):
+while (draws<1000):
     powerball.draw();
     draws += 1;
     for item in powerball.whites:
