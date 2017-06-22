@@ -89,3 +89,5 @@ ENV/
 .ropeproject
 FileScan/my-filescan.txt
 *.txt
+powerball - Copy.py
+FileScan/hashfile-v0.py
