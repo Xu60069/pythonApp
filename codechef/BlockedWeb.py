@@ -107,18 +107,25 @@ def blockedWebTest():
 def blockedWeb():
     tr=Trie26()
     blocked=[]
+    n=0
     try:
-        n=int(input())
-        for i in range(n):
-            cmd,site=input().split(" ")
-            if cmd=='+':
-                tr.put(site)
-                #print("approve "+site)
-            else:
-                blocked.append(site)
-                #print("block"+site)
+        s=input()
+        if (len)==0:
+            s=input()
+        n=int(s)
     except:
         pass
+    for i in range(n):
+        s=input()
+        if (len(s)<1):
+            s=input()
+        cmd,site=s.split(" ")
+        if cmd=='+':
+            tr.put(site)
+            #print("approve "+site)
+        else:
+            blocked.append(site)
+            #print("block"+site)
     try:
         solve(tr, blocked)
     except:
