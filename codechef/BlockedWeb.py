@@ -1,4 +1,6 @@
+import random, string, sys
 
+sys.setrecursionlimit(200000)
 class Node:
     def __init__(self):
         self.R =26
@@ -8,10 +10,17 @@ class Node:
 class Trie26:
     def __init__(self):
         self.base='a'
-        self.root=None
+        self.root=Node()
 
     def put(self, key):
-        self.root=self.put_(self.root, key, 0)
+        #self.root=self.put_(self.root, key, 0)
+        cur=self.root
+        for i in range(len(key)):
+            ind=self.getIndex(key, i)
+            if (cur.next[ind]==None):
+                cur.next[ind]=Node()
+            cur = cur.next[ind];
+        cur.name = key
 
     def getIndex(self, str, d):
         return ord(str[d])-ord(self.base)
@@ -38,7 +47,18 @@ class Trie26:
         return self.prefixMatch_(n.next[ind], k, d+1)
 
     def prefixMatch(self,key):
-        return self.prefixMatch_(self.root, key, 0)
+        #return self.prefixMatch_(self.root, key, 0)
+        # change to none recursive
+        cur=self.root
+        for i in range(len(key)):
+            ind=self.getIndex(key, i)
+            if (cur.next[ind]==None):
+                return i
+            cur = cur.next[ind];
+        return len(key)
+
+def randomword(length):
+   return ''.join(random.choice(string.ascii_lowercase) for i in range(length))
 
 def trieTest():
     tr=Trie26()
@@ -47,6 +67,10 @@ def trieTest():
     print(tr.prefixMatch("oog")==0);
     print(tr.prefixMatch("googler")==6);
     print(tr.prefixMatch("g")==1);
+    #for i in range (5):
+    #    tr.put(randomword(200000))
+    #for i in range (500):
+    #    tr.prefixMatch(randomword(2000))
 
 def solve(trie, blocked):
     ans=set()
@@ -83,17 +107,24 @@ def blockedWebTest():
 def blockedWeb():
     tr=Trie26()
     blocked=[]
-    n=int(input())
-    for i in range(n):
-        cmd,site=input().split(" ")
-        if cmd=='+':
-            tr.put(site)
-            #print("approve "+site)
-        else:
-            blocked.append(site)
-            #print("block"+site)
-    solve(tr, blocked)
+    try:
+        n=int(input())
+        for i in range(n):
+            cmd,site=input().split(" ")
+            if cmd=='+':
+                tr.put(site)
+                #print("approve "+site)
+            else:
+                blocked.append(site)
+                #print("block"+site)
+    except:
+        pass
+    try:
+        solve(tr, blocked)
+    except:
+        pass
 
+#trieTest()
 blockedWeb()
-#print("done")
+
 
