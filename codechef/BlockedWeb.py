@@ -57,7 +57,10 @@ def solve(trie, blocked):
             return
         ans.add(site[:match+1])
     print(len(ans))
-    for str in ans:
+    sorted = list(x for x in ans)
+    #print(type(sorted))
+    sorted.sort()
+    for str in sorted:
         print(str)
 
 def blockedWebTest():
@@ -92,3 +95,5 @@ def blockedWeb():
     solve(tr, blocked)
 
 blockedWeb()
+#print("done")
+
