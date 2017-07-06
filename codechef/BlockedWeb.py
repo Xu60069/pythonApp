@@ -89,7 +89,9 @@ def solve(trie, blocked):
 
 def blockedWebTest():
     tr=Trie26()
+    solve(tr, ["google"]) 
     tr.put("google");
+    solve(tr, []) 
     tr.put("codechef");
     blocked=["codeforces","codefool"]
     solve(tr, blocked)  #codef
@@ -104,27 +106,33 @@ def blockedWebTest():
     blocked.append("codechefx");
     solve(tr, blocked);
 
+def ni():
+    s=input()
+    while len(s)==0:
+        s=input()
+    try:
+        return int(s)
+    except:
+        return 0
+
+def ns():
+    s=input()
+    while len(s)==0:
+        s=input()
+    return s
+
 def blockedWeb():
     tr=Trie26()
     blocked=[]
-    n=0
-    try:
-        s=input()
-        if (len)==0:
-            s=input()
-        n=int(s)
-    except:
-        pass
+    n=ni()
     for i in range(n):
-        s=input()
-        if (len(s)<1):
-            s=input()
-        cmd,site=s.split(" ")
-        if cmd=='+':
-            tr.put(site)
+        s=ns()
+        s=s.split()
+        if s[0]=='+':
+            tr.put(s[1])
             #print("approve "+site)
         else:
-            blocked.append(site)
+            blocked.append(s[1])
             #print("block"+site)
     try:
         solve(tr, blocked)
@@ -132,6 +140,7 @@ def blockedWeb():
         pass
 
 #trieTest()
+#blockedWebTest()
 blockedWeb()
 
 
