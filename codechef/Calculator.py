@@ -5,6 +5,7 @@
 def eval(a, b, x, B):
     return x * (a+ (b-x) * B)
 
+#lowB minimum push on B, hiB maximum push B
 def brutforceCalc(lowB, hiB, a, b, B):
     max=0
     for x in range (lowB, hiB+1):
@@ -92,4 +93,4 @@ def solve():
         NB=nia()
         print(maximize(NB[0], NB[1]))
 
-test()
+solve()
