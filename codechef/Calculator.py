@@ -1,14 +1,14 @@
 # a is N%B, initial push of first button
 # b=N/B, max push for second button, x actual push of second button
 # N is total energy, B is energy need to push second button.
-# return # of second button
+# return # on second button
 def eval(a, b, x, B):
     return x * (a+ (b-x) * B)
 
-def brutforceCalc(low, hi, a, b, B):
+def brutforceCalc(lowB, hiB, a, b, B):
     max=0
-    for x in range (hi-low+1):
-        val=eval(a, b, x+low, B)
+    for x in range (lowB, hiB+1):
+        val=eval(a, b, x, B)
         if ( val==0 ):
             continue
         if (max<val):
@@ -19,10 +19,10 @@ def brutforceCalc(low, hi, a, b, B):
     return max
 
 def maximizeBrute(N, B):
-    b=N//B
-    a=N%B
-    low= 0 if a==0 else 1
-    return brutforceCalc(low, b, a, b, B)
+    maxPushB=N//B
+    numPushA=N%B  #leftover energy not enough to push B
+    #low= 0 if a==0 else 1
+    return brutforceCalc(1, maxPushB, numPushA, maxPushB, B)
 
 # upsidedown parabola, pick 5 points to find the vertex
 def binaryCalc(low, hi, a, b, B, lowVal, hiVal):
@@ -92,4 +92,4 @@ def solve():
         NB=nia()
         print(maximize(NB[0], NB[1]))
 
-solve()
+test()
