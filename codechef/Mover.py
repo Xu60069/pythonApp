@@ -1,46 +1,11 @@
-
-def moveOnce(arr, d, avg):
-    total=0
-    done=True
-    for i in range (len(arr)-d):
-        if arr[i]==avg:
-            continue
-        elif arr[i]>avg:
-            total+=arr[i]-avg
-            arr[i+d]+=arr[i]-avg
-            arr[i]=avg
-        else:
-            moves = avg-arr[i]
-            if moves > arr[i+d]:
-                moves=arr[i+d]
-            total += moves
-            arr[i] += moves
-            arr[i+d] -= moves
-            if arr[i] != avg:
-                done=False
-    for i in range(len(arr)-d, len(arr)):
-        if arr[i] != avg:
-            done=False
-            break
-    return (total, done) 
-            
-def mover(arr, d):
-    s=sum(arr)
-    avg=s//len(arr)
-    if avg * len(arr) != s:
-        return -1
-    total=0
-    done=False
-    while done==False:
-        s, done=moveOnce(arr, d, avg)
-        total += s
-        #print(total)
-        #print(done)
-        if done:
-            return total
-        elif s==0:
-            return -1
-
+# Aug 2017 challenge, CHEFMOVR
+# a mover of size D can move 1 from i to i+D
+# How many moves required to make all elements of array equal
+#
+# strategey: average of the array should be integer
+# if D>1, average of avery other d elements should also be integer, 1<=d<=D
+# Observe the fact that move happen only among element, i, i+D, i+2D, i+3D, etc, when i is from 1 to D
+# count from left to right, moves += |A[i]-avg|, update A[i+D] = A[i]-avg
 def validate(arr, d):
     avg=-1 #compute average of each range of move
     for i in range (d):
