@@ -34,15 +34,9 @@ def mover2(arr, d):
         for j in range (i, len(arr), d):
             if arr[j]==avg:
                 continue
-            elif arr[j]>avg:
-                ans += arr[j]-avg
-                arr[j+d] += arr[j]-avg
-                arr[j]=avg
             else:
-                diff=avg-arr[j]
-                ans += diff
-                arr[j+d] -= diff
-                arr[j]=avg
+                ans += arr[j]-avg if arr[j]>avg else avg-arr[j]
+                arr[j+d] += arr[j]-avg
         #print(arr)
     return ans
           
@@ -63,7 +57,6 @@ def test():
     print(mover2([1,2,6], 2))    #-1
     print(mover2([1,5,6], 2))    #-1
     print(mover2([100000000,500000000,800000000,700000000,600000000,400000000,1000000000,700000000,600000000], 3))    #13
-
 
 
 def ni():
