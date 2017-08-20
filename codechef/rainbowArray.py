@@ -1,3 +1,7 @@
+# Aug 2017 challenge, RAINBOWA, easy
+# detect array in patter 1234567654321, # of same digit must be same on either side
+# two strategies: check 4 rules for half of the array
+#                 symmetrical, and unique number is in order of 1234567
 def rainbow(arr):
     mid=(len(arr)+1)//2  #ceiling
     last=len(arr)-1
@@ -20,6 +24,27 @@ def solve(arr):
     else:
         print("no")
 
+def unique(arr):
+    s=set()
+    uni=[]
+    for i in range(len(arr)):
+        if arr[i] not in s:
+            s.add(arr[i])
+            uni.append(arr[i])
+    return uni
+            
+def solve2(arr):
+    r=arr[:]
+    r.reverse()
+    if r != arr:
+        print("no")
+        return
+    uarr=unique(arr)
+    if uarr==[1,2,3,4,5,6,7]:
+        print("yes")
+    else:
+        print("no")
+
 def test():
     solve([1,2,3,4,5,6,7,6,5,4,3,2,1])
     solve([1,2,3,4,4,5,6,6,6,7,6,6,6,5,4,4,3,2,1])
@@ -29,6 +54,15 @@ def test():
     solve([1,2,3,4,5,6,7,7,6,5,4,3,2,1])
     solve([1,2,3,4,5,6,7,8,7,6,5,4,3,2,1])
 
+def test2():
+    solve2([1,2,3,4,5,6,7,6,5,4,3,2,1])
+    solve2([1,2,3,4,4,5,6,6,6,7,6,6,6,5,4,4,3,2,1])
+    solve2([1,2,3,4,5,6,7,6,5,4,3,2,1,1])
+    solve2([1,2,3,4,5,6,8,6,5,4,3,2,1])
+    solve2([2,3,4,5,6,7,6,5,4,3,2])
+    solve2([1,2,3,4,5,6,7,7,6,5,4,3,2,1])
+    solve2([1,2,3,4,5,6,7,8,7,6,5,4,3,2,1])
+    
 def ni():
     s=input()
     while len(s)==0:
@@ -53,7 +87,6 @@ def main():
     for t in range(T):
         n=ni()
         NB=nia()
-        solve(NB)
+        solve2(NB)
 
-a=[2000000000,2000000000,2000000000]
-print(sum(a))    
+main()
