@@ -1,3 +1,4 @@
+#educational round 29, 863B
 # 2n numbers, 2n-2 pair, 2 singles
 # find the minimal sum of difference of all pairs
 # sort numbers, skip 2 numbers (n-1)*(n-1) ways
