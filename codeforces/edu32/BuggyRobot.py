@@ -1,23 +1,10 @@
 #888B
-def count(s):
-    x=0
-    y=0
-    steps=0
-    maxCount=0;
-    for c in s:
-        if c=='U':
-            y += 1
-        elif c=='D':
-            y -= 1
-        elif c=='L':
-            x -= 1
-        elif c=='R':
-            x += 1
-        steps += 1
-        if x==0 and y==0:
-            maxCount = steps
-    print(maxCount)
-
+#robot move in 4 directions, U D L R
+#Given a sequence, this robot always come back to where it started (0,0)
+#Assume it skipped some moves, find the manimum commands robot could take
+#Easy
+#count total moves to each of the 4 directions
+#difference between L and R, and  between U and D are the commands skipped
 def count2(s):
     left=0
     right=0
