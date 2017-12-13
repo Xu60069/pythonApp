@@ -1,3 +1,9 @@
+#round 450, A
+#n distinct points on a plane, none of them lie on OY axis
+#if all remaining points on one side of OY after removing one point
+#simply strategy:
+#count positive x and negative x of points
+#Yes if either count is <=1
 def ni():
     s=input()
     while len(s)==0:
@@ -14,7 +20,7 @@ def solve():
     for i in range(n):
         s=input()
         xy=s.split()
-        if int(xy[0])<0:
+        if int(xy[0])<0: # check only x
             neg +=1
         else:
             pos += 1

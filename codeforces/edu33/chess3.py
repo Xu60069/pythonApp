@@ -1,4 +1,7 @@
 #chess for 3, edu 33 A
+#Alex (#1) play with Bob (#2) in first game, Carl(#3) is spectating
+#loser of previous will be spectator
+#find if the log of winners is valid
 
 def ni():
     s=input()
@@ -9,34 +12,18 @@ def ni():
     except:
         return 0
 
-def nia():
-    s=input()
-    while len(s)==0:
-        s=input()
-    s=s.split()
-    iVal=[];
-    for i in range (len(s)):
-        iVal.append(int(s[i]))
-    return iVal
-
 def solve():
     games=ni()
-    winner=[0]*games
+    winner=[None]*games
     for i in range (games):
-        winner[i]=nia()
+        winner[i]=ni()
     last=winner[0]
-    loser=0
-    spect=0
+    if last==3:     #special case, first game winner must be 1 or 2
+        return False
+    loser=3-last
+    spect=3
     for i in range(1, games):
-        if winner[i]==last and loser==0:
-            continue
-        if loser==0:  #first time 2 diff winner
-            loser=last
-            last=winner[i]
-            for j in range (1,4):
-                if j!=loser and j!=last:
-                    spect=j
-        elif winner[i]==last:
+        if winner[i]==last:     #same winner, swap spect and loser
             temp=loser
             loser=spect
             spect=temp
