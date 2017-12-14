@@ -20,8 +20,28 @@ def packing(a):
             ans.sort()       # sort to improve performance
     return len(ans)
 
-#print (packing([1,2,3]))
-#print (packing([4,2,4,3,5,6,7,6,9,7,6,3,1,8,8]))
+# better idea from editorial
+# find the max boxes of the same size, that should determine the result
+def packing2(a):
+    a.sort()
+    ans=1  #assume at least one box
+    last=a[0]
+    lastIndex=0
+    for i in range(1,len(a)):
+        if a[i]==last:
+            continue
+        count=i-lastIndex  #find next size
+        if count>ans:
+            ans=count
+        last=a[i]
+        lastIndex=i
+    count=len(a)-lastIndex  #check last box too
+    if count>ans:
+        ans=count
+    return ans
+    
+#print (packing2([1,2,3])==1)
+#print (packing2([4,2,4,3,5,6,7,9,9,9,7,6,3,1,8,8])==3)
 
 
 def ni():
@@ -44,4 +64,4 @@ def nia():
     return iVal
 
 n=ni()
-print (packing(nia()))
+print (packing2(nia()))
