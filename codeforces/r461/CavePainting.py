@@ -1,10 +1,13 @@
+#check if all n mod i, 1 ≤ i ≤ k, are distinct, i. e. there is no such pair (i, j) that:
+# 1 ≤ i < j ≤ k,
+# n mod i = n mod j
 def remainderSet(n, k):
     rem=set()
-    for i in range(1,k+1):
+    for i in range(1,k+1): #computer remainder from 1 to k
         r=n%i
-        if r in rem:
+        if r in rem:    # return false if exist
             return False
-        else:
+        else:           # add to set
             rem.add(r)
     return True
 
