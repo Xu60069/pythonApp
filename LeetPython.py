@@ -78,7 +78,35 @@ class Triangle:
         memo=[[self.maxInt32]*n for _ in range(n)]
         return self.minimumTotalDp(triangle, 0, 0, memo)
 
-def testTriangle:
+def testTriangle():
     triangle=[[1],[2,3]]
     test=Triangle()
     print(test.minimumTotal(triangle))
+
+#416. Partition Equal Subset Sum
+class EqualSubsetSum:  #beat 77%
+    def canPartition(self, nums):
+        sum=0  # or int(0)
+        for n in nums:
+            sum += n
+        if sum&1 == 1:
+            return False
+        sum //= 2  # don't use /= float
+        dp = [False]*(sum+1)
+        dp[0]=True
+        for n in nums:
+            if sum>=n:
+                dp[sum] = dp[sum] or dp[sum-n]
+                if dp[sum]:
+                    return True
+            for j in range(sum-1, 0, -1):
+                if j>=n:
+                    dp[j] = dp[j] or dp[j-n]
+        return dp[sum]
+
+def testEqualSubsetSumPartition():
+    test=EqualSubsetSum()
+    print(test.canPartition([3,3,3,4,5]))
+    print(test.canPartition([1, 2, 3, 5])==False)
+
+testEqualSubsetSumPartition()
