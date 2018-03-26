@@ -126,3 +126,25 @@ class DominoTromino:
             dp2[n] = (dp2[n] + dp2[n-1]) % MOD # tromino + domino extend tromino
 
         return dp[N]
+    
+class OutBoundaryPaths:
+    def findPaths(self, m, n, N, i, j):
+        dp3 = [[[0] * (n + 1) for _ in range(m + 1)] for _ in range (2)]
+        MOD=1000000007
+        prev = 0
+        current = 0
+        for x in range (1, N+1):
+            current = 1 - prev
+            for r in range (m):
+                for c in range (n):
+                    dp3[current][r][ c] = 1 if r == 0 else  dp3[prev][r - 1][c]  # up !ERROR don't use i-- etc
+                    dp3[current][r][c] += 1 if r == m - 1 else dp3[prev][r + 1][c]  # down
+                    #dp3[current][r][c] %= MOD
+                    dp3[current][r][c] += 1 if c == 0 else dp3[prev][r][c - 1]  # left
+                    #dp3[current][r][c] %= MOD
+                    dp3[current][r][c] += 1 if c == n - 1 else dp3[prev][r][c + 1]  # left
+                    dp3[current][r][c] %= MOD
+            prev = current; # swap
+        return dp3[current][i][j];
+                    
+        
