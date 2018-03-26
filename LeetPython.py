@@ -109,4 +109,20 @@ def testEqualSubsetSumPartition():
     print(test.canPartition([3,3,3,4,5]))
     print(test.canPartition([1, 2, 3, 5])==False)
 
-testEqualSubsetSumPartition()
+class DominoTromino:
+    def numTilings(self, N):
+        if N<3:
+            return N
+        dp=[0]*(N+1)
+        dp[1]=1
+        dp[2]=2
+        dp2=[0]*(N+1)
+        dp2[1]=1
+        dp2[2]=2
+        for n in range (3, N+1):
+            dp[n] = (dp[n-1] + dp[n-2]) % MOD  # domino to domino
+            dp[n] = (dp[n] + dp2[n-1]) % MOD   # tromino+tromino
+            dp2[n] = (2 * dp[n-2]) % MOD       # domino + tromino
+            dp2[n] = (dp2[n] + dp2[n-1]) % MOD # tromino + domino extend tromino
+
+        return dp[N]
