@@ -53,3 +53,31 @@ class Solution:
             A=A[:i:-1]+A[:i]  # chop off the last elem each time
             print(A)
         return flips
+
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    #971. Flip Binary Tree To Match Preorder Traversal
+    def flipMatchVoyage(self, root, voyage):
+        """
+        :type root: TreeNode
+        :type voyage: List[int]
+        :rtype: List[int]
+        """
+        self.i=0
+        flips=[]
+        def dfs(root):
+            if not root:
+                return True;
+            if root.val != voyage[self.i]:
+                return False
+            if root.left and root.right and root.right.val==voyage[self.i+1]:
+                root.left, root.right=root.right, root.left
+                flips.append(root.val)
+            self.i += 1
+            return dfs(root.left) and dfs(root.right)
+        return flips if dfs(root) else [-1]
